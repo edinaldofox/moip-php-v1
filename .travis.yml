@@ -1,0 +1,23 @@
+language: php
+php:
+  - '5.5'
+  - '5.6'
+  - '7.0'
+  - '7.1'
+
+before_script:
+  - curl -s http://getcomposer.org/installer | php
+  - php composer.phar install -n
+  - sed -i 's/^;//' ~/.phpenv/versions/$(phpenv global)/etc/conf.d/xdebug.ini
+  - travis_retry composer self-update
+  - travis_retry composer install --prefer-source --no-interaction --dev
+
+script:
+  - php vendor/bin/phpunit
+
+after_script:
+  - php vendor/bin/codacycoverage clover path/to/clover.xml
+
+notifications:
+  email:
+    - valterjrdev@gmail.com
