@@ -15,6 +15,7 @@ script:
   - php vendor/bin/phpunit
 
 after_script:
+  - export CODACY_PROJECT_TOKEN=88fff3daac34443990b904a2ab2edcb9
   - php vendor/bin/codacycoverage clover path/to/clover.xml
 
 notifications:
